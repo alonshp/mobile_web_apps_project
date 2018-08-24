@@ -22,7 +22,7 @@ body{
     padding: 14px 16px;
     transition: 0.3s;
     font-size: 17px;
-    width: 33%;
+    width: 50%;
 }
 
 .tab button:hover {
@@ -128,11 +128,10 @@ li:hover .edit{
     
     .tab button {
         font-size: 40px;
-        width: 33%;
+        width: 50%;
     }
     
     button {
-        width: 330px;
         height: 80px;
         font-size: 35px;
         display: block;

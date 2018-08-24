@@ -1,16 +1,15 @@
 body{
 	font-family: Helvetica, sans-serif;
-	background: #CCCC;
+    background: #CCCC;
 }
 
 #container{
 	margin: 100px auto;
-    width: 360px;
+    width: 80%;
 }
 
 .tab { 
     overflow: hidden;
-    border: 1px solid #ccc;
     background-color: #f1f1f1;
 }
 
@@ -35,7 +34,7 @@ body{
 }
 
 h1{
-	background-color: black;
+	background-color: lightblue;
 	color: white;
 	margin: 0;
 	padding: 10px 20px;
@@ -69,7 +68,7 @@ input{
 	background-color: inherit;
 	border: 0;
 	font-size: 15px;
-	text-align: center
+    padding-left: 25px;
 }
 
 input#groupsInput{
@@ -107,4 +106,56 @@ li:hover .trash,li:hover .add{
 
 li:hover .add{
     background-color: green;
+}
+
+@media only screen and (min-width: 480px) {
+
+    #container {
+        width: 360px;
+    }
+}
+
+@media only screen and (max-device-width: 480px) {
+    
+    #container{
+        margin: 200px auto;
+        width: 80%;
+    }
+
+    h1 {
+        font-size: 55px;
+    }
+    
+    .tab button {
+        font-size: 40px;
+    }
+    
+    button {
+        width: 330px;
+        height: 80px;
+        font-size: 35px;
+        display: block;
+        border-radius: 8px;
+        border: 1px solid #E5DBDB;
+    }
+
+    .tab button:hover {
+        background: #E5DBDB;
+    }
+
+    input#groupsInput{
+        font-size: 40px;
+    }
+
+    li{
+        height: 70px;
+    }
+
+    input {
+        font-size: 35px;   
+    }
+
+    ul {
+        height: 630px;
+    }
 }

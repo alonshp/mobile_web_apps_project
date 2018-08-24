@@ -1,11 +1,11 @@
 body{
     font-family: Helvetica, sans-serif;
-    background: #CCCC;
+    background: lightblue;
 }
 
 #container{
     margin: 100px auto;
-    width: 360px;
+    width: 80%;
     padding: 40px;
     background: lightblue;
 }
@@ -17,27 +17,82 @@ h1{
     text-transform: uppercase;
     font-size: 24px;
     font-weight: normal;
-    margin: 15px 0;
+    margin: 15px 0 20px;
 }
 
-input{
+input {
     width: 100%;
     margin:5px 0 15px 0;
     padding: 5px;
     background-color: #f1f1f1;
     border: 0;
-    font-size: 15px;
+    font-size: 17px;
     text-align: center;
     box-sizing: border-box;
 }
 
 button {
-    background: #E5DBDB;
+    background: white;
     width: 150px;
     height: 30px;
     box-sizing: border-box;
-    margin-top: 10px;
-    margin-left: 100px;
+    display: block;
+    margin: 15px auto 0;
     border-radius: 8px;
     font-size: inherit;
+    border: 1px solid #E5DBDB;
+}
+
+button:hover {
+    background: #E5DBDB;
+}
+
+
+@media only screen and (min-width: 480px) {
+
+    body {
+        background: #CCCC;
+    }
+
+    #container {
+        width: 360px;
+    }
+}
+
+@media only screen and (max-device-width: 480px) {
+    body {
+        background-color: lightblue;
+    }
+    #container{
+        margin: 200px auto;
+        width: 80%;
+        background: lightblue
+    }
+
+    h1 {
+        font-size: 56px;
+        margin-bottom: 30px;
+    }
+    
+    input {
+        font-size: 42px;
+    }
+
+    b { 
+        font-size: 38px;
+    }
+
+    button {
+        width: 330px;
+        height: 80px;
+        font-size: 35px;
+        display: block;
+        margin: 40px auto 0;
+        border-radius: 8px;
+        border: 1px solid #E5DBDB;
+    }
+
+    button:hover {
+        background: #E5DBDB;
+    }
 }
