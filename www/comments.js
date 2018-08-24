@@ -1,5 +1,8 @@
 let input = document.querySelector("input");
 let board = document.querySelector("ul");
+let myGroupsTab = document.getElementById("my-groups");
+let groupsTab = document.getElementById("groups");
+let projectsTab = document.getElementById("projects")
 
 fetch('/comments/', { method: 'GET', credentials: 'include'}).then(function(r){ return r.json()}).then(function(comments) {
     for(let [key,value] of Object.entries(Comments)) {
@@ -23,12 +26,11 @@ input.addEventListener("keypress", function(e){
     }
 })
 
-function createIdea(id, text) {
+function createIdea(id, text, name) {
 
     const markup = `
     <li id="${id}">
-        <i class="far fa-edit edit"></i>
-        <i class="fas fa-trash trash"></i>
+        <p>${name}</p>
         <input value="${text}" disabled/>
     </li>
     `;
