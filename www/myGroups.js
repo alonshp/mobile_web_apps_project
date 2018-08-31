@@ -15,7 +15,7 @@ groupsTab.addEventListener("click", () => {
 
 fetch(`/mygroups`, { method: 'GET', credentials: 'include'}).then(function(r){ return r.json()}).then(function(userGroups) {
     for(let [key,value] of Object.entries(userGroups)) {
-        createIdea(key, value);
+        createIdea(key, value.name);
     }
 })
 

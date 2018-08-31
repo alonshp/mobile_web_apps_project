@@ -32,7 +32,7 @@ projectsTab.addEventListener("click", () => {
 
 fetch(`/tasks/${groupID}/${projectID}`, { method: 'GET', credentials: 'include'}).then(function(r){ return r.json()}).then(function(ideas) {
     for(let [key,value] of Object.entries(ideas)) {
-        createIdea(key, value);
+        createIdea(key, value.text);
     }
 })
 

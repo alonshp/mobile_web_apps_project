@@ -27,7 +27,7 @@ groupsTab.addEventListener("click", () => {
 
 fetch(`/projects/${groupID}`, { method: 'GET', credentials: 'include'}).then(function(r){ return r.json()}).then(function(ideas) {
     for(let [key,value] of Object.entries(ideas)) {
-        createIdea(key, value);
+        createIdea(key, value.name);
     }
 })
 
@@ -85,7 +85,7 @@ function createIdea(id, text) {
 }
 
 const doStuffOnServer = (id, method, body) => {
-    fetch(`/projects/${id}`, {method, credentials: 'include', headers: {
+    fetch(`/projects/${groupID}/${id}`, {method, credentials: 'include', headers: {
         'content-type': "application/json"
     } ,body});
 }

@@ -13,7 +13,7 @@ groupsTab.addEventListener("click", () => {
 
 fetch(`/groups`, { method: 'GET', credentials: 'include'}).then(function(r){ return r.json()}).then(function(groups) {
     for(let [key,value] of Object.entries(groups)) {
-        createIdea(key, value);
+        createIdea(key, value.name);
     }
 })
 
