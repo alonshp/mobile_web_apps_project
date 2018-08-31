@@ -3,24 +3,55 @@ let board = document.querySelector("ul");
 let myGroupsTab = document.getElementById("my-groups");
 let groupsTab = document.getElementById("groups");
 let projectsTab = document.getElementById("projects")
+let tasksTab = document.getElementById("tasks")
 
-fetch('/comments/', { method: 'GET', credentials: 'include'}).then(function(r){ return r.json()}).then(function(comments) {
-    for(let [key,value] of Object.entries(Comments)) {
-        createIdea(key, value);
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+let groupID = getParameterByName("groupid")
+let projectID = getParameterByName("projectid")
+let taskID = getParameterByName("taskid")
+
+myGroupsTab.addEventListener("click", () => {
+  window.location = '/static/myGroups.html';
+});
+
+groupsTab.addEventListener("click", () => {
+  window.location = '/static/groups.html';
+});
+
+projectsTab.addEventListener("click", () => {
+  window.location = '/static/projects.html?groupid=' + groupID;
+});
+
+tasksTab.addEventListener("click", () => {
+  window.location = '/static/tasks.html?groupid=' + groupID + '&projectid=' + projectID;
+});
+
+fetch(`/comments/${groupID}/${projectID}/${taskID}`, { method: 'GET', credentials: 'include'}).then(function(r){ return r.json()}).then(function(comments) {
+    for(let [key,value] of Object.entries(comments)) {
+        createIdea(key, value.text, value.name);
     }
 })
 
 input.addEventListener("keypress", function(e){
     if(e.which === 13){
-        const value = this.value 
-        fetch('/comments/', { method: 'PUT', credentials: 'include', headers: {
+        const value = this.value
+        fetch(`/comments/${groupID}/${projectID}/${taskID}`, { method: 'PUT', credentials: 'include', headers: {
             'content-type': "application/json"
         } ,body: JSON.stringify({
             text: document.getElementById('commentInput').value
         })})
             .then(function (r) { return r.json()})
             .then(function (id) {
-                createIdea(id, value)
+                location.reload();
             })
         this.value = '';
     }
@@ -69,4 +100,3 @@ const onBlur = ({target}) => {
     const id = target.parentElement.id;
     doStuffOnServer(id, 'post', JSON.stringify({text: target.value}));
 }
-

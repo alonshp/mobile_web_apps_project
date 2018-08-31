@@ -58,7 +58,7 @@ function createIdea(id, text) {
     <li id="${id}">
         <i class="far fa-edit edit"></i>
         <i class="fas fa-trash trash"></i>
-        <input value="${text}" disabled/>
+        <input class="input" value="${text}" disabled/>
     </li>
     `;
 
@@ -80,6 +80,12 @@ function createIdea(id, text) {
             input.removeAttribute('disabled');
             input.addEventListener('blur', onBlur);
             return;
+        }
+
+        if (target.classList.contains('input')) {
+          const id = target.parentElement.id;
+          window.location = '/static/comments.html?groupid=' + groupID + '&projectid=' + projectID + "&taskid=" + id;
+          return;
         }
     });
 }

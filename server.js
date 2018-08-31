@@ -293,6 +293,38 @@ app.post('/tasks/:id/:groupid/:projectid', function (req, res) {
     res.send('0');
 });
 
+//  ------------ comments ------------
+
+// get task comments
+app.get('/comments/:groupid/:projectid/:taskid', function (req, res) {
+    const username = req.cookies.userName;
+    const organizationOfUser = appData['users'][username]['organization']
+    const groupid = req.params.groupid;
+    const projectid = req.params.projectid;
+    const taskid = req.params.taskid;
+    res.cookie('userName', username, {maxAge: (1000 * 60 * 30)});
+    console.log("/tasks: get comments");
+    res.json(appData['organizations'][organizationOfUser]["groups"][groupid]["projects"][projectid]['tasks'][taskid]['comments']);
+});
+
+// add comment to task
+app.put('/comments/:groupid/:projectid/:taskid', function(req, res) {
+    const username = req.cookies.userName;
+    const organizationOfUser = appData['users'][username]['organization']
+    const groupid = req.params.groupid;
+    const projectid = req.params.projectid;
+    const taskid = req.params.taskid;
+    res.cookie('userName', username, {maxAge: (1000 * 60 * 30)});
+    const text = req.body.text;
+    const name = appData['users'][username]['name']
+    const id = appData['lastCommentID'];
+    appData['lastCommentID'] = id + 1;
+    appData['organizations'][organizationOfUser]["groups"][groupid]["projects"][projectid]['tasks'][taskid]['comments'][id] = {'text':text , 'name':name}
+    writeData();
+    console.log("/tasks: add comment");
+    res.json({id: id + ''});
+});
+
 
 //  ------------ persistence ------------
 
