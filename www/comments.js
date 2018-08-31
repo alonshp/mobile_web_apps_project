@@ -1,8 +1,11 @@
 let input = document.querySelector("input");
 let board = document.querySelector("ul");
+let myGroupsTab = document.getElementById("my-groups");
+let groupsTab = document.getElementById("groups");
+let projectsTab = document.getElementById("projects")
 
-fetch('/ideas/', { method: 'GET', credentials: 'include'}).then(function(r){ return r.json()}).then(function(ideas) {
-    for(let [key,value] of Object.entries(ideas)) {
+fetch('/comments/', { method: 'GET', credentials: 'include'}).then(function(r){ return r.json()}).then(function(comments) {
+    for(let [key,value] of Object.entries(Comments)) {
         createIdea(key, value);
     }
 })
@@ -10,10 +13,10 @@ fetch('/ideas/', { method: 'GET', credentials: 'include'}).then(function(r){ ret
 input.addEventListener("keypress", function(e){
     if(e.which === 13){
         const value = this.value 
-        fetch('/ideas/', { method: 'PUT', credentials: 'include', headers: {
+        fetch('/comments/', { method: 'PUT', credentials: 'include', headers: {
             'content-type': "application/json"
         } ,body: JSON.stringify({
-            text: document.getElementById('ideaInput').value
+            text: document.getElementById('commentInput').value
         })})
             .then(function (r) { return r.json()})
             .then(function (id) {
@@ -23,12 +26,11 @@ input.addEventListener("keypress", function(e){
     }
 })
 
-function createIdea(id, text) {
+function createIdea(id, text, name) {
 
     const markup = `
     <li id="${id}">
-        <i class="far fa-edit edit"></i>
-        <i class="fas fa-trash trash"></i>
+        <p>${name}</p>
         <input value="${text}" disabled/>
     </li>
     `;
@@ -56,7 +58,7 @@ function createIdea(id, text) {
 }
 
 const doStuffOnServer = (id, method, body) => {
-    fetch(`/ideas/${id}`, {method, credentials: 'include', headers: {
+    fetch(`/comments/${id}`, {method, credentials: 'include', headers: {
         'content-type': "application/json"
     } ,body});
 }

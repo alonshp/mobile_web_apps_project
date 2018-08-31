@@ -3,7 +3,6 @@ let board = document.querySelector("ul");
 let myGroupsTab = document.getElementById("my-groups");
 let groupsTab = document.getElementById("groups");
 
-
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, '\\$&');
