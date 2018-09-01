@@ -1,6 +1,7 @@
 body{
     font-family: Helvetica, sans-serif;
     background: lightblue;
+    background-image: url("project.png")
 }
 
 #container{

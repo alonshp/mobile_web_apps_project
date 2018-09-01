@@ -1,4 +1,5 @@
 let loginBtn = document.getElementById("login");
+let homePageBtn = document.getElementById("home-page");
 
 loginBtn.addEventListener("click", () => fetch('/users/login', { method: 'POST', credentials: 'include', headers: {
         'content-type': "application/json"
@@ -13,3 +14,8 @@ loginBtn.addEventListener("click", () => fetch('/users/login', { method: 'POST',
         window.location = '/static/register.html';
     }
 }));
+
+homePageBtn.addEventListener("click", () => {
+    window.location = '/static/homePage.html';
+});
+
