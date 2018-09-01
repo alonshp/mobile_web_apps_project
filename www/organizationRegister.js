@@ -1,4 +1,5 @@
 let registerBtn = document.getElementById("register");
+let homePageBtn = document.getElementById("home-page");
 
 registerBtn.addEventListener("click", () => fetch('/organizations/register', { method: 'POST', headers: {
         'content-type': "application/json"
@@ -12,3 +13,7 @@ registerBtn.addEventListener("click", () => fetch('/organizations/register', { m
       alert("Organization with this name already exists");
     }
 }));
+
+homePageBtn.addEventListener("click", () => {
+    window.location = '/static/homePage.html';
+});

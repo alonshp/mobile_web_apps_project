@@ -1,5 +1,6 @@
 let registerBtn = document.getElementById("register");
 let loginBtn = document.getElementById("login");
+let homePageBtn = document.getElementById("homePage");
 
 registerBtn.addEventListener("click", () => fetch('/users/register', { method: 'POST', headers: {
         'content-type': "application/json"
@@ -18,4 +19,10 @@ registerBtn.addEventListener("click", () => fetch('/users/register', { method: '
     }
 }));
 
-loginBtn.addEventListener("click", () => window.location = "/static/login.html");
+loginBtn.addEventListener("click", () => {
+    window.location = "/static/login.html"
+});
+
+homePageBtn.addEventListener("click", () => {
+    window.location = '/static/homePage.html';
+});
