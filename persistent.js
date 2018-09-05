@@ -2,12 +2,14 @@ let express = require('express');
 let bodyParser = require('body-parser');
 let fs = require('fs');
 let app = express();
+let cookieParser = require('cookie-parser');
 
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 
 app.use(bodyParser.json({ type: 'application/json' }));
+app.use(cookieParser());
 
 
 let appData = {}
@@ -32,20 +34,20 @@ app.post('/data/persist', function(req, res) {
 });
 
 // clean data
-app.post('/data/clean', function(req, res) {
+app.get('/data/clean', function(req, res) {
     console.log("/persistent: clean data");
-    const data = {
-      "users":{},
-      "organizations":{},
-      "lastGroupID":0,
-      "lastProjectID":0,
-      "lastTaskID":0,
-      "lastCommentID":0
+    const username = req.cookies.userName;
+    if (!username) {
+      res.send('1');
+      return
     }
-    appData = data;
-    writeData(data);
-
-    res.send('0');
+    const isDeleted = delete appData['users'][username]
+    if (isDeleted) {
+      writeData(appData);
+      res.send('0');
+    } else {
+      res.send('1');
+    }
 });
 //  ------------ persistence ------------
 
