@@ -171,12 +171,12 @@ app.get('/groups', function (req, res) {
         res.cookie('userName', username, {maxAge: (1000 * 60 * 30)});
         let groupsWithoutUserGroups = {}
         for (let groupId in appData['organizations'][organizationOfUser]['groups']) {
-            if (!appData['users'][username]["groups"][groupId]) {
-                groupsWithoutUserGroups[groupId] = appData['organizations'][organizationOfUser]['groups'][groupId]
-            }
-            console.log("/groups: get groups");
-            res.json(groupsWithoutUserGroups);
+          if (!appData['users'][username]["groups"][groupId]) {
+            groupsWithoutUserGroups[groupId] = appData['organizations'][organizationOfUser]['groups'][groupId]
+          }
         }
+        console.log("/groups: get groups");
+        res.json(groupsWithoutUserGroups);
     } catch(err) {
         res.end(err.message);
     }
